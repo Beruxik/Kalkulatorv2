@@ -26,7 +26,7 @@ namespace Lab_1
         }
 
         double a = 0;
-        double b = 0;
+        //double b = 0;
         char sign;
         bool isLastOperationASign;
 
@@ -34,33 +34,32 @@ namespace Lab_1
         {
             Button button = sender as Button;
 
-            if(isLastOperationASign == true)
+            if (isLastOperationASign == true)
             {
                 Display.Text = "0";
                 isLastOperationASign = false;
             }
-            if (Display.Text == "0" || sign == 'e')
+
+            if (Display.Text.Length >= 8)
+            { }
+            else if (Display.Text == "0" || sign == 'e')
                 Display.Text = button.Content.ToString();
             else
                 Display.Text += button.Content.ToString();
+
+
         }
 
         private void button_Sign_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            
-            if (button.Name == "button_clear_all")
-            {
-                Display.Text = "0";
-                a = 0;
-                b = 0;
-            }
-            else if (button.Name == "button_plus")
+
+            if (button.Name == "button_plus")
             {
                 a = double.Parse(Display.Text);
                 //Display.Text = "0";
                 sign = 'p';
-                
+
             }
             else if (button.Name == "button_minus")
             {
@@ -82,7 +81,7 @@ namespace Lab_1
             }
             else if (button.Name == "button_equals")
             {
-                if(isLastOperationASign == false)
+                if (isLastOperationASign == false)
                 {
                     if (sign == 'p')
                     {
@@ -117,28 +116,44 @@ namespace Lab_1
                         }
                     }
                     a = 0;
-                    b = 0;
+                    //b = 0;
                 }
             }
             isLastOperationASign = true;
-            if (button.Name == "button_point")
+        }
+
+        private void button_Point_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+
+            if (Display.Text.Length >= 7)
+            { }
+            else
             {
                 isLastOperationASign = false;
                 if (!Display.Text.Contains(","))
                     Display.Text += ",";
             }
-            else if (button.Name == "button_change_sign")
-            {
-                if (Display.Text[0] == '-')
-                    Display.Text = Display.Text.Substring(1);
-                else if (Display.Text == "0")
-                {
-                    
-                }
-                else
-                    Display.Text = "-" + Display.Text;
-            }
+        }
 
+        private void button_ChangeSign_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+
+            if (Display.Text[0] == '-')
+                Display.Text = Display.Text.Substring(1);
+            else if (Display.Text == "0")
+            {
+
+            }
+            else
+                Display.Text = "-" + Display.Text;
+        }
+
+        private void button_Clear_Click(object sender, RoutedEventArgs e)
+        {
+            Display.Text = "0";
+            a = 0;
         }
 
         /*
